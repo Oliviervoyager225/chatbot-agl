@@ -1,0 +1,10 @@
+node_modules
+dist
+.angular
+.git
+.gitignore
+*.md
+*.log
+coverage
+.nyc_output
+.vscode

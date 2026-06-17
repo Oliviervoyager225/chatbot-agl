@@ -1,0 +1,41 @@
+<div class="messages-container">
+  @for (msg of messages(); track msg.id) {
+    @if (!msg.isStreaming || msg.content) {
+      <div class="message-row" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+        @if (msg.role === 'assistant') {
+          <div class="avatar assistant-avatar">
+            <img src="logo-agl.png" alt="AGL" class="avatar-logo" />
+          </div>
+        }
+        <div class="bubble" [class.user-bubble]="msg.role === 'user'" [class.assistant-bubble]="msg.role === 'assistant'">
+          <div class="md-content" [innerHTML]="msg.content | markdown"></div>
+          @if (!msg.isStreaming) {
+            <span class="timestamp">{{ msg.timestamp | date:'HH:mm' }}</span>
+          }
+        </div>
+      </div>
+    }
+  }
+
+  @if (isLoading()) {
+    <div class="message-row assistant">
+      <div class="avatar assistant-avatar">
+        <img src="logo-agl.png" alt="AGL" class="avatar-logo" />
+      </div>
+      <div class="bubble assistant-bubble typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-banner">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      {{ error() }}
+    </div>
+  }
+
+  <div #messagesEnd></div>
+</div>

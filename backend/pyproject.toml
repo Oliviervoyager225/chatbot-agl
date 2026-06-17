@@ -1,0 +1,44 @@
+[project]
+name = "agl-backend-chatbot"
+version = "0.1.0"
+description = "RAG-first enterprise chatbot for Africa Global Logistics (AGL)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "requests>=2.32.0",
+    "langchain>=0.3",
+    "langgraph>=0.4",
+    "langchain-google-genai>=2.1",
+    "langchain-qdrant>=0.2",
+    "qdrant-client>=1.12",
+    "langchain-community>=0.3",
+    "duckduckgo-search>=8.0",
+    "pydantic-settings>=2.7",
+    "gradio>=5.0",
+    "ddgs>=9.14.2",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-mock>=3.14",
+    "ruff>=0.8",
+    "black>=24.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["src/tests"]
+
+[tool.ruff]
+src = ["src", "tests"]
+
+[tool.black]
+line-length = 88

@@ -1,0 +1,22 @@
+// ── Orb animations ─────────────────────────────────────────────────────────
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1); filter: blur(0.5px); }
+  50%       { transform: scale(1.04); filter: blur(0.8px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0.9; }
+}
+
+// ── Message entry ─────────────────────────────────────────────────────────
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Typing dots ───────────────────────────────────────────────────────────
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-6px); opacity: 1; }
+}

@@ -1,0 +1,36 @@
+# ── Frontend ──────────────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/npm-debug.log
+frontend/yarn-error.log
+
+# Angular cache (à la racine du monorepo)
+.angular/
+
+# ── Backend ───────────────────────────────────────────────────────────────────
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/.ruff_cache/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/data/
+
+# ── Secrets — JAMAIS committé ────────────────────────────────────────────────
+backend/.env
+.env
+*.env
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+*.log
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,237 @@
+@use '../../../../../styles/variables' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 3px; }
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 32px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.message-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+
+  &.user {
+    flex-direction: row-reverse;
+  }
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.assistant-avatar {
+  width: 38px;
+  height: 38px;
+  background: #1b365f;
+  /* box-shadow: 0 2px 8px rgba(46, 125, 50, 0.25); */ /* Green */
+  /* box-shadow: 0 2px 8px rgba(201, 151, 58, 0.25); */ /* Golden */
+  box-shadow: 0 2px 8px rgba(27, 54, 95, 0.25); /* Navy */
+  overflow: hidden;
+}
+
+.avatar-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 3px;
+}
+
+.bubble {
+  max-width: 70%;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+
+  p { margin: 0; white-space: pre-wrap; word-break: break-word; }
+}
+
+.md-content {
+  word-break: break-word;
+  line-height: 1.65;
+
+  p {
+    margin: 0 0 10px;
+    &:last-child { margin-bottom: 0; }
+  }
+
+  /* Listes avec puces creuses ○ */
+  ul, ol, .md-list {
+    margin: 6px 0 10px 0;
+    padding-left: 22px;
+  }
+  ul, ul.md-list   { list-style-type: circle; }
+  ol               { list-style-type: decimal; }
+  li {
+    margin-bottom: 5px;
+    padding-left: 2px;
+    line-height: 1.6;
+  }
+
+  strong { font-weight: 700; }
+  em     { font-style: italic; }
+
+  code {
+    font-family: monospace;
+    background: rgba(0,0,0,0.07);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 13px;
+  }
+
+  pre {
+    background: rgba(0,0,0,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    overflow-x: auto;
+    margin: 8px 0;
+    code { background: none; padding: 0; }
+  }
+
+  h1, h2, h3 { font-weight: 700; margin: 12px 0 5px; line-height: 1.3; }
+  h1         { font-size: 16px; }
+  h2         { font-size: 15px; }
+  h3         { font-size: 14px; }
+
+  /* Liens cliquables — couleur primaire, s'ouvrent dans un nouvel onglet */
+  a {
+    color: $primary;
+    text-decoration: underline;
+    word-break: break-all;
+    &:hover { opacity: 0.75; }
+  }
+
+  blockquote {
+    border-left: 3px solid $primary-light;
+    padding-left: 10px;
+    color: $muted-foreground;
+    margin: 6px 0;
+  }
+
+  hr { border: none; border-top: 1px solid $border; margin: 10px 0; }
+
+  /* ── Bloc Sources ── */
+  .sources-block {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid $border;
+    border-radius: 10px;
+    background: $primary-soft;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sources-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: $foreground;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .source-link {
+    a {
+      font-size: 12.5px;
+      color: $primary;
+      text-decoration: none;
+      word-break: break-all;
+      display: block;
+
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  /* Bloc "Sources :" automatiquement mis en valeur */
+  p:has(+ ul a),
+  p:last-of-type:not(:first-child) {
+    &:empty { display: none; }
+  }
+}
+
+.timestamp {
+  display: block;
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  text-align: right;
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-bubble {
+  background: $muted;
+  color: $foreground;
+  border-bottom-left-radius: 4px;
+
+  .timestamp { color: $muted-foreground; }
+}
+
+/* Typing indicator */
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 18px;
+  min-width: 56px;
+
+  span {
+    width: 7px;
+    height: 7px;
+    background: $primary;
+    border-radius: 50%;
+    animation: typingDot 1.2s ease-in-out infinite;
+
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  color: #dc2626;
+  font-size: 13px;
+
+  svg { width: 16px; height: 16px; flex-shrink: 0; }
+}

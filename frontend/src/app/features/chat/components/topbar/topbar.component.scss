@@ -1,0 +1,102 @@
+@use '../../../../../styles/variables' as *;
+
+.main-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid $border-light;
+  flex-shrink: 0;
+}
+
+.model-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px 7px 9px;
+  background: #fff;
+  border: 1px solid $border;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $foreground;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: $primary; }
+}
+
+.model-pill-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  transition: background 0.3s;
+
+  &.offline { background: #ef4444; }
+}
+
+.model-pill-caret {
+  width: 12px;
+  height: 12px;
+  color: $muted-foreground;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-icon-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $foreground;
+  transition: background 0.12s;
+
+  &:hover { background: $muted; }
+  svg { width: 16px; height: 16px; }
+}
+
+.topbar-btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  background: #fff;
+  border: 1px solid $border;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $foreground;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover { background: #fafaf8; border-color: #d0d0d0; }
+  svg { width: 14px; height: 14px; }
+}
+
+.topbar-btn-dark {
+  padding: 8px 18px;
+  background: $black;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+
+  &:hover { background: #2a2a2a; }
+}

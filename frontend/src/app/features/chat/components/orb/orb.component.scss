@@ -1,0 +1,84 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/animations' as *;
+
+.orb-wrap {
+  width: 73px;
+  height: 73px;
+  margin: 12px 0 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.orb-logo {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  z-index: 2;
+}
+
+.orb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* Green orb (original) */
+  /* background: radial-gradient(
+    circle at 35% 30%,
+    #ffffff 0%,
+    #c8e6c9 25%,
+    $primary-light 55%,
+    $primary 85%
+  );
+  box-shadow:
+    0 0 60px rgba(102, 187, 106, 0.4),
+    0 0 120px rgba(46, 125, 50, 0.25),
+    inset 0 0 30px rgba(255, 255, 255, 0.4); */
+
+  /* Golden orb (commented out) */
+  /* background: radial-gradient(
+    circle at 35% 30%,
+    #ffffff 0%,
+    #f9e8b8 25%,
+    $primary-light 55%,
+    $primary 85%
+  );
+  box-shadow:
+    0 0 60px rgba(238, 213, 142, 0.4),
+    0 0 120px rgba(201, 151, 58, 0.25),
+    inset 0 0 30px rgba(255, 255, 255, 0.4); */
+
+  /* Navy orb — fond uni #1b365f, effets inchangés */
+  background: #1b365f;
+  box-shadow:
+    0 0 60px rgba(74, 122, 181, 0.4),
+    0 0 120px rgba(27, 54, 95, 0.25),
+    inset 0 0 30px rgba(255, 255, 255, 0.4);
+
+  filter: blur(0.5px);
+  animation: orbPulse 4s ease-in-out infinite;
+}
+
+.orb-glow {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  /* background: radial-gradient(circle, rgba(102, 187, 106, 0.25) 0%, transparent 65%); */ /* Green glow */
+  /* background: radial-gradient(circle, rgba(238, 213, 142, 0.25) 0%, transparent 65%); */ /* Golden glow */
+  background: radial-gradient(circle, rgba(74, 122, 181, 0.25) 0%, transparent 65%); /* Navy glow */
+  z-index: -1;
+  animation: glowPulse 4s ease-in-out infinite;
+}

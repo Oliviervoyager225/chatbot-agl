@@ -1,0 +1,56 @@
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: chatbot-agl-frontend:latest
+    container_name: chatbot-agl-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - chatbot-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: chatbot-agl-backend:latest
+    container_name: chatbot-agl-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    volumes:
+      - ./backend/data:/app/data
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+    networks:
+      - chatbot-net
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: chatbot-agl-qdrant
+    ports:
+      - "6333:6333"
+    environment:
+      - QDRANT__SERVICE__API_KEY=agl-chatbot-key-2026@
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+    networks:
+      - chatbot-net
+
+volumes:
+  qdrant_data:
+
+networks:
+  chatbot-net:
+    driver: bridge

@@ -1,0 +1,58 @@
+<div class="app">
+  <app-sidebar (newChat)="onNewChat()" />
+
+  <main class="main">
+    <app-topbar />
+
+    <div class="hero" [class.welcome]="!hasMessages()" [class.chat-mode]="hasMessages()">
+      @if (!hasMessages()) {
+        <!-- Welcome screen -->
+        <app-orb />
+        <h1 class="greeting">{{ t.greeting }}</h1>
+        <h2 class="greeting-question">{{ t.greetingQuestion }}</h2>
+        <app-chat-input (submitted)="onSend($event)" />
+        <app-suggestion-cards (selected)="onSuggestionSelected($event)" />
+      } @else {
+        <!-- Chat view -->
+        <app-chat-messages />
+        <div class="chat-input-sticky">
+          <app-chat-input (submitted)="onSend($event)" />
+        </div>
+      }
+    </div>
+
+    <div class="main-footer">
+      <div class="footer-text">
+        {{ t.footerText }}
+        <a class="footer-link" href="https://www.aglgroup.com" target="_blank" rel="noopener">{{ t.joinDiscord }}</a>
+      </div>
+      <div class="footer-actions">
+        <div class="lang-switcher">
+          <button class="footer-icon-btn" title="Language" (click)="toggleLangMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/>
+              <path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+            </svg>
+          </button>
+          @if (langMenuOpen()) {
+            <div class="lang-menu">
+              <button class="lang-option" [class.active]="currentLang === 'fr'" (click)="selectLang('fr')">
+                Français
+              </button>
+              <button class="lang-option" [class.active]="currentLang === 'en'" (click)="selectLang('en')">
+                English
+              </button>
+            </div>
+          }
+        </div>
+        <button class="footer-icon-btn" title="Help">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
