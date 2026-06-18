@@ -1,0 +1,14 @@
+langchain>=0.3
+langgraph>=0.4
+langchain-google-genai>=2.1
+langchain-qdrant>=0.2
+qdrant-client>=1.12
+langchain-community>=0.3
+duckduckgo-search>=8.0
+pydantic-settings>=2.7
+gradio>=6.0
+ddgs>=9.0
+fastapi>=0.115
+uvicorn[standard]>=0.34
+beautifulsoup4>=4.14
+requests>=2.32
