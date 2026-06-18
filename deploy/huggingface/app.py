@@ -3,9 +3,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
+import gradio as gr
+from backend.app.api import app as fastapi_app
 from backend.gradio import _create_app
 
 demo = _create_app()
-
-if __name__ == "__main__":
-    demo.launch()
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")

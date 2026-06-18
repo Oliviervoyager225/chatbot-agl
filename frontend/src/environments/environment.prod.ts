@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-api.example.com/api',
+  apiUrl: 'https://dakouri225-agl-chatbot.hf.space',
 };

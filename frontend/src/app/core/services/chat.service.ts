@@ -2,6 +2,7 @@ import { Injectable, inject, signal, computed, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Message, ChatSession, ApiHealthResponse } from '../models/message.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
@@ -25,7 +26,7 @@ export class ChatService {
 
   // ── Health check ─────────────────────────────────────────────────────────
   checkHealth(): void {
-    fetch('/health')
+    fetch(`${environment.apiUrl}/health`)
       .then(res => res.json())
       .then(data => this.zone.run(() => this.apiOnline.set(data?.status === 'ok')))
       .catch(() => this.zone.run(() => this.apiOnline.set(false)));
@@ -50,7 +51,7 @@ export class ChatService {
 
   private async streamChat(question: string, assistantId: string): Promise<void> {
     try {
-      const res = await fetch('/chat', {
+      const res = await fetch(`${environment.apiUrl}/chat`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ question }),
@@ -134,7 +135,7 @@ export class ChatService {
       : 'AGL logistics assistant. Give 3 SHORT suggestions. STRICT format, nothing else:\n1. [title 3 words max] | [short phrase 10 words max]\n2. [title 3 words max] | [short phrase 10 words max]\n3. [title 3 words max] | [short phrase 10 words max]';
 
     try {
-      const res = await fetch('/chat', {
+      const res = await fetch(`${environment.apiUrl}/chat`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ question: prompt }),
