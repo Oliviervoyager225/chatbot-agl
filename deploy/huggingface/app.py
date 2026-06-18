@@ -7,5 +7,5 @@ import gradio as gr
 from backend.app.api import app as fastapi_app
 from backend.gradio import _create_app
 
-demo = _create_app()
-app = gr.mount_gradio_app(fastapi_app, demo, path="/")
+_demo = _create_app()
+app = gr.mount_gradio_app(fastapi_app, _demo, path="/")
